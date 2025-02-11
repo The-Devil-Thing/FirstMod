@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "firstmod:mercury_drop"
+    }
+  ],
+  "result": {
+    "count": 4,
+    "id": "firstmod:mercuric_droplets"
+  }
+}
