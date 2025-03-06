@@ -38,3 +38,13 @@ Added:
 Added:
 * Items
   * Seed Item (Just a base item)
+
+06/03/2025
+
+Added:
+* Tags
+  * Infusable - All the items that could be infused into the seed.
+    * Currently has:
+      * c:ingots
+      * c:gems
+      * Redstone Dust
