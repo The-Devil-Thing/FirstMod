@@ -30,5 +30,11 @@ Added Loot Table and Mining requirement to Pedestal.
 Downgraded to 1.21.1
 
 Added:
-* Items
+* Blocks
   * Infuser (Still has Diamond Block Texture)
+
+12/02/2025
+
+Added:
+* Items
+  * Seed Item (Just a base item)

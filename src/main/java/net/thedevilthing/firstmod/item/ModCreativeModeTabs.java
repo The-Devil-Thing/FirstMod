@@ -23,6 +23,9 @@ public class ModCreativeModeTabs {
                             .displayItems(((parameters, output) -> {
                                 output.accept(ModItems.MERCURIC_DROPLETS);
                                 output.accept(ModItems.MERCURY_DROP);
+
+                                output.accept(ModItems.SEED);
+
                                 output.accept(ModBlocks.PEDESTAL);
                                 output.accept(ModBlocks.INFUSER);
                             }))

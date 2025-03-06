@@ -57,14 +57,7 @@ public class Firstmod {
 
     // Add the example block item to the building blocks tab
     private void addCreative(BuildCreativeModeTabContentsEvent event) {
-        if(event.getTabKey() == CreativeModeTabs.INGREDIENTS) {
-            event.accept(ModItems.MERCURIC_DROPLETS);
-            event.accept(ModItems.MERCURY_DROP);
-        }
-        if(event.getTabKey() == CreativeModeTabs.BUILDING_BLOCKS) {
-            event.accept(ModBlocks.PEDESTAL);
-            event.accept(ModBlocks.INFUSER);
-        }
+
     }
 
     // You can use SubscribeEvent and let the Event Bus discover methods to call
