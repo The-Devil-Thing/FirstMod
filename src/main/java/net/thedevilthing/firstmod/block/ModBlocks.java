@@ -1,8 +1,10 @@
 package net.thedevilthing.firstmod.block;
 
+import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.DropExperienceBlock;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.neoforged.bus.api.IEventBus;
@@ -27,6 +29,13 @@ public class ModBlocks {
                     .strength(2f)
                     .requiresCorrectToolForDrops()
                     .sound(SoundType.METAL)));
+
+    public static final DeferredBlock<Block> NETHER_MERCURY_ORE = registerBlock("nether_mercury_ore",
+            () -> new DropExperienceBlock(UniformInt.of(5, 10),
+                    BlockBehaviour.Properties.of()
+                            .strength(3f)
+                            .requiresCorrectToolForDrops()
+                            .sound(SoundType.NETHERRACK)));
 
     //Helper Functions to also create a Block Item from the corresponding Blocks
     private static <T extends Block> DeferredBlock<T> registerBlock(String name, Supplier<T> block) {

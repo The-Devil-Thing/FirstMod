@@ -1,0 +1,16 @@
+{
+  "remove": [
+    "minecraft:prismarine_crystals"
+  ],
+  "values": [
+    "minecraft:redstone",
+    {
+      "id": "#c:ingots",
+      "required": false
+    },
+    {
+      "id": "#c:gems",
+      "required": false
+    }
+  ]
+}

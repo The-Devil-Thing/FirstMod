@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "I": {
+      "item": "minecraft:iron_ingot"
+    },
+    "M": {
+      "item": "firstmod:mercuric_droplets"
+    }
+  },
+  "pattern": [
+    " M ",
+    "MIM",
+    " M "
+  ],
+  "result": {
+    "count": 1,
+    "id": "firstmod:seed"
+  }
+}

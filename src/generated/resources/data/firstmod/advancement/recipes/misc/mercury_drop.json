@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_mercuric_droplets": {
+      "conditions": {
+        "items": [
+          {
+            "items": "firstmod:mercuric_droplets"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "firstmod:mercury_drop"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_mercuric_droplets"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "firstmod:mercury_drop"
+    ]
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:smelting",
+  "category": "misc",
+  "cookingtime": 200,
+  "experience": 0.7,
+  "group": "mercury_droplets",
+  "ingredient": {
+    "item": "firstmod:nether_mercury_ore"
+  },
+  "result": {
+    "count": 1,
+    "id": "firstmod:mercuric_droplets"
+  }
+}

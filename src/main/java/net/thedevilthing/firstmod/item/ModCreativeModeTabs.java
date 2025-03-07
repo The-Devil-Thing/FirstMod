@@ -28,6 +28,7 @@ public class ModCreativeModeTabs {
 
                                 output.accept(ModBlocks.PEDESTAL);
                                 output.accept(ModBlocks.INFUSER);
+                                output.accept(ModBlocks.NETHER_MERCURY_ORE);
                             }))
                             .build());
 
