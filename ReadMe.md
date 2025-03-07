@@ -48,3 +48,16 @@ Added:
       * c:ingots
       * c:gems
       * Redstone Dust
+
+07/03/2025
+
+Added:
+* Blocks
+  * Nether Mercury Ore (Retextured Nether Quartz Ore)
+
+* Data Gen
+  * Loot Table
+  * Block State
+  * Block and Item tag
+  * Item Model
+  * Recipe
