@@ -16,6 +16,7 @@ import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
 import net.neoforged.neoforge.event.server.ServerStartingEvent;
 import net.thedevilthing.firstmod.block.ModBlocks;
+import net.thedevilthing.firstmod.component.ModDataComponents;
 import net.thedevilthing.firstmod.item.ModCreativeModeTabs;
 import net.thedevilthing.firstmod.item.ModItems;
 import org.slf4j.Logger;
@@ -43,6 +44,8 @@ public class Firstmod {
 
         ModItems.register(modEventBus);
         ModBlocks.register(modEventBus);
+
+        ModDataComponents.register(modEventBus);
 
         // Register the item to a creative tab
         modEventBus.addListener(this::addCreative);

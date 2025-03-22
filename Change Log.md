@@ -55,3 +55,14 @@ Added:
     * Block and Item tag
     * Item Model
     * Recipe
+
+23/03/2025
+
+Added:
+* Data Components
+  * Infusion Percentage
+  * Infused Item
+
+Added logic for infusion by right-clicking on the infuser with the seed in main hand and an infusable item in the offhand.
+
+Currently, all items require 10 of them to be infused fully in the seed.
