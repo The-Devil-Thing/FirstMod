@@ -1,13 +1,18 @@
 package net.thedevilthing.firstmod;
 
+import com.mojang.logging.LogUtils;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.item.Item;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.fml.event.config.ModConfigEvent;
 import net.neoforged.neoforge.common.ModConfigSpec;
+import org.slf4j.Logger;
 
+import java.io.Serializable;
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -16,35 +21,45 @@ import java.util.stream.Collectors;
 // Demonstrates how to use Neo's config APIs
 @EventBusSubscriber(modid = Firstmod.MOD_ID, bus = EventBusSubscriber.Bus.MOD)
 public class Config {
+    private static final Logger LOGGER = LogUtils.getLogger();
+
     private static final ModConfigSpec.Builder BUILDER = new ModConfigSpec.Builder();
 
-    private static final ModConfigSpec.BooleanValue LOG_DIRT_BLOCK = BUILDER.comment("Whether to log the dirt block on common setup").define("logDirtBlock", true);
+    private static final ModConfigSpec.IntValue TIER_COUNT = BUILDER.comment("Total Number of Tiers").defineInRange("tier_count", 4, 1, 10);
+    private static final ModConfigSpec.DoubleValue BASE_INFUSION_AMOUNT = BUILDER.comment("The base insuion amount which will be multiplied by tier value.").defineInRange("base_infusion", 5, 0.1, 10);
 
-    private static final ModConfigSpec.IntValue MAGIC_NUMBER = BUILDER.comment("A magic number").defineInRange("magicNumber", 42, 0, Integer.MAX_VALUE);
-
-    public static final ModConfigSpec.ConfigValue<String> MAGIC_NUMBER_INTRODUCTION = BUILDER.comment("What you want the introduction message to be for the magic number").define("magicNumberIntroduction", "The magic number is... ");
-
-    // a list of strings that are treated as resource locations for items
-    private static final ModConfigSpec.ConfigValue<List<? extends String>> ITEM_STRINGS = BUILDER.comment("A list of items to log on common setup.").defineListAllowEmpty("items", List.of("minecraft:iron_ingot"), Config::validateItemName);
+    private static final ModConfigSpec.ConfigValue<List<? extends Integer>> TIER_VALUES = BUILDER.comment("Infusion percentage per item for each tier (Indexed from 1).").defineList("tier_values", getDefaultTiers(), Integer.class::isInstance);
 
     static final ModConfigSpec SPEC = BUILDER.build();
 
-    public static boolean logDirtBlock;
-    public static int magicNumber;
-    public static String magicNumberIntroduction;
-    public static Set<Item> items;
+    public static int tierCount;
+    public static double baseInfusion;
+    public static List<Integer> tierValues;
 
-    private static boolean validateItemName(final Object obj) {
-        return obj instanceof String itemName && BuiltInRegistries.ITEM.containsKey(ResourceLocation.parse(itemName));
-    }
+//    private static boolean validateItemName(final Object obj) {
+//        return obj instanceof String itemName && BuiltInRegistries.ITEM.containsKey(ResourceLocation.parse(itemName));
+//    }
 
     @SubscribeEvent
     static void onLoad(final ModConfigEvent event) {
-        logDirtBlock = LOG_DIRT_BLOCK.get();
-        magicNumber = MAGIC_NUMBER.get();
-        magicNumberIntroduction = MAGIC_NUMBER_INTRODUCTION.get();
+        tierCount = TIER_COUNT.get();
+        baseInfusion = BASE_INFUSION_AMOUNT.get();
+        tierValues = TIER_VALUES.get().stream().map(Integer.class::cast).toList();
 
-        // convert the list of strings into a set of items
-        items = ITEM_STRINGS.get().stream().map(itemName -> BuiltInRegistries.ITEM.get(ResourceLocation.parse(itemName))).collect(Collectors.toSet());
+        if (tierValues.size() != tierCount) {
+            LOGGER.error("[FirstMod] ERROR: The number of tier values ({}) does not match the tier count ({}).", tierValues.size(), tierCount);
+            throw new IllegalStateException("Config Error: tier_values list size must match tier_count.");
+        }
+    }
+
+    public static int getInfusionAmountForTier(int tier) {
+        if (tier >= 1 && tier <= tierValues.size()) {
+            return tierValues.get(tier - 1);
+        }
+        return 2;// Default infusion amount if tier is out of range
+    }
+
+    private static List<Integer> getDefaultTiers() {
+        return List.of(1, 2, 3, 4);
     }
 }

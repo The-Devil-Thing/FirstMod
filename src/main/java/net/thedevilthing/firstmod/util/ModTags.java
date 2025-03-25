@@ -16,8 +16,6 @@ public class ModTags {
     }
 
     public static class Items {
-        public static final TagKey<Item> INFUSABLES = createTag("infusables");
-
         private static TagKey<Item> createTag(String name) {
             return ItemTags.create(ResourceLocation.fromNamespaceAndPath(Firstmod.MOD_ID, name));
         }

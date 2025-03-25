@@ -3,8 +3,6 @@ package net.thedevilthing.firstmod.component;
 import com.mojang.serialization.Codec;
 import net.minecraft.core.component.DataComponentType;
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.nbt.CompoundTag;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredHolder;
@@ -21,6 +19,8 @@ public class ModDataComponents {
     public static final DeferredHolder<DataComponentType<?>, DataComponentType<Item>> ITEM_TYPE = register("item_type", builder -> builder.persistent(
             BuiltInRegistries.ITEM.byNameCodec()
     ));
+
+    public static final DeferredHolder<DataComponentType<?>, DataComponentType<Integer>> TIER = register("tier", builder -> builder.persistent(Codec.INT));
 
     private static <T>DeferredHolder<DataComponentType<?>, DataComponentType<T>> register(String name, UnaryOperator<DataComponentType.Builder<T>> builderOperator) {
         return DATA_COMPONENT_TYPES.register(name, () -> builderOperator.apply(DataComponentType.builder()).build());

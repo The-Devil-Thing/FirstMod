@@ -66,3 +66,29 @@ Added:
 Added logic for infusion by right-clicking on the infuser with the seed in main hand and an infusable item in the offhand.
 
 Currently, all items require 10 of them to be infused fully in the seed.
+
+26/03/2025
+
+Added:
+* Config
+  * Main Config
+    * Max number of tiers
+    * Base amount for infusion
+    * List of multiplicative index for the tiers
+  * Second Config
+    * The items and the tier they should be in.
+
+* Datapack
+  * Datapack for dynamic generation of 'infusables' tag based on config file. 
+
+* Data Component
+  * Tier - Denotes the tier of Seed.
+
+* Added tiers to SeedItem.
+  * Can be increased by having another seed in offhand while right-clicking the seed on infuser.
+
+Removed:
+* Data Generator:
+  * Data Generator for 'infusables' tag. (Added dynamic generation)
+
+Upgrade to v1.21.1-0.0.2

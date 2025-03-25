@@ -10,8 +10,13 @@
 
   "creativetab.firstmod.first_mod": "First Mod",
 
-  "tooltip.firstmod.seed.infused": "Infused with:",
+  "tooltip.firstmod.seed.infused": "Infused with: ",
+  "tooltip.firstmod.seed.tier": "Tier: ",
 
-  "message.firstmod.infusion_complete": "⚠ Infusion Complete!",
-  "message.firstmod.wrong_item": "⚠ Use %s to continue infusion!"
+  "message.firstmod.infusion_complete": "✔ Infusion Complete!",
+  "message.firstmod.wrong_item": "⚠ Use %s to continue infusion!",
+  "message.firstmod.high_tier": "⚠ %s is too strong!",
+  "message.firstmod.shift_to_consume": "⚠ Hold SHIFT to consume infused seed!",
+  "message.firstmod.tier_upgraded": "✔ Seed Tier Upgraded to %s!",
+  "message.firstmod.max_tier": "⚠ Seed already at max tier!"
 }

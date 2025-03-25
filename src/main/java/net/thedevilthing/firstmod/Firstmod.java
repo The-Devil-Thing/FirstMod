@@ -1,8 +1,7 @@
 package net.thedevilthing.firstmod;
 
 import com.mojang.logging.LogUtils;
-import net.minecraft.client.Minecraft;
-import net.minecraft.world.item.CreativeModeTabs;
+import net.minecraft.server.MinecraftServer;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -19,7 +18,13 @@ import net.thedevilthing.firstmod.block.ModBlocks;
 import net.thedevilthing.firstmod.component.ModDataComponents;
 import net.thedevilthing.firstmod.item.ModCreativeModeTabs;
 import net.thedevilthing.firstmod.item.ModItems;
+import net.thedevilthing.firstmod.util.datapack.DataPackGenerator;
+import net.thedevilthing.firstmod.util.datapack.DataPackManager;
+import net.thedevilthing.firstmod.util.datapack.DynamicTagGenerator;
 import org.slf4j.Logger;
+
+import java.io.File;
+import java.util.List;
 
 // The value here should match an entry in the META-INF/neoforge.mods.toml file
 @Mod(Firstmod.MOD_ID)
@@ -51,7 +56,8 @@ public class Firstmod {
         modEventBus.addListener(this::addCreative);
 
         // Register our mod's ModConfigSpec so that FML can create and load the config file for us
-        modContainer.registerConfig(ModConfig.Type.COMMON, Config.SPEC);
+        modContainer.registerConfig(ModConfig.Type.COMMON, Config.SPEC, "firstmod/firstmod-common.toml");
+        modContainer.registerConfig(ModConfig.Type.COMMON, InfusionItemsConfig.SPEC, "firstmod/firstmod_infusion_items.toml");
     }
 
     private void commonSetup(final FMLCommonSetupEvent event) {
@@ -66,7 +72,14 @@ public class Firstmod {
     // You can use SubscribeEvent and let the Event Bus discover methods to call
     @SubscribeEvent
     public void onServerStarting(ServerStartingEvent event) {
-        // Do something when the server starts
+        MinecraftServer server = event.getServer();
+
+        File dataPackFolder = DataPackManager.getDataPackFolder(server);
+
+        DataPackGenerator.generateDataPack(dataPackFolder);
+        DynamicTagGenerator.generateTagFile(dataPackFolder);
+
+        LOGGER.debug("DataPack Generation Complete {}", dataPackFolder.getAbsolutePath());
     }
 
     // You can use EventBusSubscriber to automatically register all static methods in the class annotated with @SubscribeEvent
