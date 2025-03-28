@@ -92,3 +92,9 @@ Removed:
   * Data Generator for 'infusables' tag. (Added dynamic generation)
 
 Upgrade to v1.21.1-0.0.2
+
+29/03/2025
+
+Added:
+* Ore Generation
+  * Nether Mercury Ore

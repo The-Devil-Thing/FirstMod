@@ -32,7 +32,7 @@ public class ModBlockLootTableProvider extends BlockLootSubProvider {
         dropSelf(ModBlocks.INFUSER.get());
 
         add(ModBlocks.NETHER_MERCURY_ORE.get(),
-                block -> createMultipleOreDrops(ModBlocks.NETHER_MERCURY_ORE.get(), ModItems.MERCURIC_DROPLETS.get(), 8, 20));
+                block -> createMultipleOreDrops(ModBlocks.NETHER_MERCURY_ORE.get(), ModItems.MERCURIC_DROPLETS.get(), 5, 10));
     }
 
     protected LootTable.Builder createMultipleOreDrops(Block block, Item item, float minDrops, float maxDrops) {
