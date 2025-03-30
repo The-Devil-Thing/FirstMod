@@ -18,6 +18,7 @@ import net.thedevilthing.firstmod.block.ModBlocks;
 import net.thedevilthing.firstmod.component.ModDataComponents;
 import net.thedevilthing.firstmod.item.ModCreativeModeTabs;
 import net.thedevilthing.firstmod.item.ModItems;
+import net.thedevilthing.firstmod.loot.ModLootModifiers;
 import net.thedevilthing.firstmod.util.datapack.DataPackGenerator;
 import net.thedevilthing.firstmod.util.datapack.DataPackManager;
 import net.thedevilthing.firstmod.util.datapack.DynamicTagGenerator;
@@ -51,6 +52,8 @@ public class Firstmod {
         ModBlocks.register(modEventBus);
 
         ModDataComponents.register(modEventBus);
+
+        ModLootModifiers.register(modEventBus);
 
         // Register the item to a creative tab
         modEventBus.addListener(this::addCreative);

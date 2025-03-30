@@ -98,3 +98,11 @@ Upgrade to v1.21.1-0.0.2
 Added:
 * Ore Generation
   * Nether Mercury Ore
+
+31/03/2025
+
+Added:
+* Mercuric Droplets as Extra Loot for Some Ore blocks.
+
+Changed:
+* Distribution of Nether Mercury Ore.

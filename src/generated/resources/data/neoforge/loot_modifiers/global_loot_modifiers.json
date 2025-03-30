@@ -1,0 +1,14 @@
+{
+  "entries": [
+    "firstmod:mercuric_droplets_to_quartz_ore",
+    "firstmod:mercuric_droplets_to_copper_ore",
+    "firstmod:mercuric_droplets_to_deepslate_gold_ore",
+    "firstmod:mercuric_droplets_to_gold_ore",
+    "firstmod:mercuric_droplets_to_deepslate_copper_ore",
+    "firstmod:mercuric_droplets_to_diamond_ore",
+    "firstmod:mercuric_droplets_to_iron_ore",
+    "firstmod:mercuric_droplets_to_deepslate_iron_ore",
+    "firstmod:mercuric_droplets_to_deepslate_diamond_ore"
+  ],
+  "replace": false
+}
