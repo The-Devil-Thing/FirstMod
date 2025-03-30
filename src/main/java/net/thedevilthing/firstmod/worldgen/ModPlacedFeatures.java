@@ -20,12 +20,9 @@ public class ModPlacedFeatures {
     public static void bootstrap(BootstrapContext<PlacedFeature> context) {
         var configuredFeatures = context.lookup(Registries.CONFIGURED_FEATURE);
 
-//    FIXME
-//      Change the ore placement to rareOrePlacement
-
         register(context, NETHER_MERCURY_ORE_PLACEED_KEY,
                 configuredFeatures.getOrThrow(ModConfiguredFeatures.NETHER_MERCURY_ORE_KEY),
-                ModOrePlacement.commonOrePlacement(12, HeightRangePlacement.uniform(VerticalAnchor.aboveBottom(10), VerticalAnchor.belowTop(10))));
+                ModOrePlacement.rareOrePlacement(3, HeightRangePlacement.uniform(VerticalAnchor.absolute(121), VerticalAnchor.absolute(75))));
     }
 
     private static ResourceKey<PlacedFeature> registerKey(String name) {
