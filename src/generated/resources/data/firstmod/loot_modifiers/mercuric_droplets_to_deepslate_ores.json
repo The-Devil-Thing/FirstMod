@@ -2,11 +2,11 @@
   "type": "firstmod:add_item",
   "conditions": [
     {
-      "block": "minecraft:deepslate_iron_ore",
-      "condition": "minecraft:block_state_property"
+      "condition": "firstmod:block_tag_match",
+      "tag": "c:ores_in_ground/deepslate"
     },
     {
-      "chance": 0.2,
+      "chance": 0.35,
       "condition": "minecraft:random_chance"
     }
   ],

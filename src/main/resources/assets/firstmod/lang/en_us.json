@@ -13,6 +13,8 @@
   "tooltip.firstmod.seed.infused": "Infused with: ",
   "tooltip.firstmod.seed.tier": "Tier: ",
 
+  "enchantment.firstmod.mercury_filter": "Mercury Filter",
+
   "message.firstmod.infusion_complete": "✔ Infusion Complete!",
   "message.firstmod.wrong_item": "⚠ Use %s to continue infusion!",
   "message.firstmod.high_tier": "⚠ %s is too strong!",

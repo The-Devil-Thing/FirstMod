@@ -106,3 +106,14 @@ Added:
 
 Changed:
 * Distribution of Nether Mercury Ore.
+
+04/04/2025
+
+Added:
+* Loot Item Condition
+  * Loot Item Block Tag Condition
+    * Checks for block tags
+
+* Enchantment
+  * Mercury Filter
+    * Just shell with no functionality yet.
