@@ -11,6 +11,7 @@ import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredBlock;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import net.thedevilthing.firstmod.Firstmod;
+import net.thedevilthing.firstmod.block.custom.InfuserBlock;
 import net.thedevilthing.firstmod.item.ModItems;
 
 import java.util.function.Supplier;
@@ -25,10 +26,11 @@ public class ModBlocks {
                     .sound(SoundType.STONE)));
 
     public static final DeferredBlock<Block> INFUSER = registerBlock("infuser",
-            () -> new Block(BlockBehaviour.Properties.of()
+            () -> new InfuserBlock(BlockBehaviour.Properties.of()
                     .strength(2f)
                     .requiresCorrectToolForDrops()
-                    .sound(SoundType.METAL)));
+                    .sound(SoundType.METAL)
+                    .noOcclusion()));
 
     public static final DeferredBlock<Block> NETHER_MERCURY_ORE = registerBlock("nether_mercury_ore",
             () -> new DropExperienceBlock(UniformInt.of(5, 10),

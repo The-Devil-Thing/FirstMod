@@ -117,3 +117,10 @@ Added:
 * Enchantment
   * Mercury Filter
     * Just shell with no functionality yet.
+
+07/04/2025
+
+Changed:
+* Infuser converted to Block Entity
+  * Added Renderer
+  * Can hold 1 item like a item frame

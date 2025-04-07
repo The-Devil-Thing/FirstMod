@@ -11,10 +11,13 @@ import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.config.ModConfig;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
+import net.neoforged.neoforge.client.event.EntityRenderersEvent;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
 import net.neoforged.neoforge.event.server.ServerStartingEvent;
 import net.thedevilthing.firstmod.block.ModBlocks;
+import net.thedevilthing.firstmod.block.entity.ModBlockEntities;
+import net.thedevilthing.firstmod.block.entity.renderer.InfusionBlockEntityRenderer;
 import net.thedevilthing.firstmod.component.ModDataComponents;
 import net.thedevilthing.firstmod.item.ModCreativeModeTabs;
 import net.thedevilthing.firstmod.item.ModItems;
@@ -26,7 +29,6 @@ import net.thedevilthing.firstmod.util.datapack.DynamicTagGenerator;
 import org.slf4j.Logger;
 
 import java.io.File;
-import java.util.List;
 
 // The value here should match an entry in the META-INF/neoforge.mods.toml file
 @Mod(Firstmod.MOD_ID)
@@ -57,6 +59,8 @@ public class Firstmod {
         ModLootModifiers.register(modEventBus);
 
         ModLootConditions.register(modEventBus);
+
+        ModBlockEntities.register(modEventBus);
 
         // Register the item to a creative tab
         modEventBus.addListener(this::addCreative);
@@ -94,6 +98,11 @@ public class Firstmod {
         @SubscribeEvent
         public static void onClientSetup(FMLClientSetupEvent event) {
 
+        }
+
+        @SubscribeEvent
+        public static void registerBER(EntityRenderersEvent.RegisterRenderers event) {
+            event.registerBlockEntityRenderer(ModBlockEntities.INFUSER_BE.get(), InfusionBlockEntityRenderer::new);
         }
     }
 }
