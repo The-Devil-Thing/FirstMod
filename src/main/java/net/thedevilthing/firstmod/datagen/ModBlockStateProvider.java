@@ -14,7 +14,6 @@ public class ModBlockStateProvider extends BlockStateProvider {
 
     @Override
     protected void registerStatesAndModels() {
-        blockWithItem(ModBlocks.INFUSER);
         blockWithItem(ModBlocks.PEDESTAL);
 
         blockWithItem(ModBlocks.NETHER_MERCURY_ORE);
