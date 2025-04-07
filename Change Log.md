@@ -117,3 +117,9 @@ Added:
 * Enchantment
   * Mercury Filter
     * Just shell with no functionality yet.
+
+07/04/2025
+* Changed loot to loot table drop
+* Tried to roll the loot table mulitple times with Mercury Filter Enchantment - Failed.
+* Made it work with Fortune - but game crashes due to sometimes going in infinite loop.
+* Unable to work on this branch anymore.

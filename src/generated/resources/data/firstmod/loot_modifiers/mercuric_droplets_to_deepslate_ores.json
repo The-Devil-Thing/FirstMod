@@ -10,5 +10,6 @@
       "condition": "minecraft:random_chance"
     }
   ],
-  "item": "firstmod:mercuric_droplets"
+  "enchantment": "minecraft:fortune",
+  "table": "firstmod:inject/mercuric_droplets"
 }
