@@ -20,5 +20,7 @@
   "message.firstmod.high_tier": "⚠ %s is too strong!",
   "message.firstmod.shift_to_consume": "⚠ Hold SHIFT to consume infused seed!",
   "message.firstmod.tier_upgraded": "✔ Seed Tier Upgraded to %s!",
-  "message.firstmod.max_tier": "⚠ Seed already at max tier!"
+  "message.firstmod.max_tier": "⚠ Seed already at max tier!",
+
+  "menu.infuser": "Resource Infuser"
 }

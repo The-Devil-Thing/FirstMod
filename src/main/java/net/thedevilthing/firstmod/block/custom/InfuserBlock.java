@@ -2,11 +2,14 @@ package net.thedevilthing.firstmod.block.custom;
 
 import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
+import net.minecraft.network.chat.Component;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.ItemInteractionResult;
+import net.minecraft.world.SimpleMenuProvider;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.BlockGetter;
@@ -64,16 +67,10 @@ public class InfuserBlock extends BaseEntityBlock {
 
     @Override
     protected ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult) {
-        if(level.getBlockEntity(pos) instanceof InfuserBlockEntity infuserBlockEntity) {
-            if(infuserBlockEntity.inventory.getStackInSlot(0).isEmpty() && !stack.isEmpty()) {
-                infuserBlockEntity.inventory.insertItem(0, stack.copy(), false);
-                stack.shrink(1);
-                level.playSound(player, pos, SoundEvents.ITEM_PICKUP, SoundSource.BLOCKS, 1f, 2f);
-            } else if(stack.isEmpty()) {
-                ItemStack stackOnPedestal = infuserBlockEntity.inventory.extractItem(0, 1, false);
-                player.setItemInHand(InteractionHand.MAIN_HAND, stackOnPedestal);
-                infuserBlockEntity.clearContents();
-                level.playSound(player, pos, SoundEvents.ITEM_PICKUP, SoundSource.BLOCKS, 1f, 1f);
+        if((level.getBlockEntity(pos) instanceof InfuserBlockEntity infuserBlockEntity)) {
+            if (!player.isCrouching() && !level.isClientSide()) {
+                ((ServerPlayer) player).openMenu(new SimpleMenuProvider(infuserBlockEntity, Component.translatable("menu.infuser")), pos);
+                return ItemInteractionResult.SUCCESS;
             }
         }
 

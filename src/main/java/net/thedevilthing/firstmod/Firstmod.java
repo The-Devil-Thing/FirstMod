@@ -12,6 +12,7 @@ import net.neoforged.fml.config.ModConfig;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.neoforged.neoforge.client.event.EntityRenderersEvent;
+import net.neoforged.neoforge.client.event.RegisterMenuScreensEvent;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
 import net.neoforged.neoforge.event.server.ServerStartingEvent;
@@ -23,6 +24,9 @@ import net.thedevilthing.firstmod.item.ModCreativeModeTabs;
 import net.thedevilthing.firstmod.item.ModItems;
 import net.thedevilthing.firstmod.loot.ModLootConditions;
 import net.thedevilthing.firstmod.loot.ModLootModifiers;
+import net.thedevilthing.firstmod.screen.ModMenuTypes;
+import net.thedevilthing.firstmod.screen.custom.InfuserMenu;
+import net.thedevilthing.firstmod.screen.custom.InfuserScreen;
 import net.thedevilthing.firstmod.util.datapack.DataPackGenerator;
 import net.thedevilthing.firstmod.util.datapack.DataPackManager;
 import net.thedevilthing.firstmod.util.datapack.DynamicTagGenerator;
@@ -61,6 +65,8 @@ public class Firstmod {
         ModLootConditions.register(modEventBus);
 
         ModBlockEntities.register(modEventBus);
+
+        ModMenuTypes.register(modEventBus);
 
         // Register the item to a creative tab
         modEventBus.addListener(this::addCreative);
@@ -103,6 +109,11 @@ public class Firstmod {
         @SubscribeEvent
         public static void registerBER(EntityRenderersEvent.RegisterRenderers event) {
             event.registerBlockEntityRenderer(ModBlockEntities.INFUSER_BE.get(), InfusionBlockEntityRenderer::new);
+        }
+
+        @SubscribeEvent
+        public static void registerScreeens(RegisterMenuScreensEvent event) {
+            event.register(ModMenuTypes.INFUSER_MENU.get(), InfuserScreen::new);
         }
     }
 }
