@@ -124,3 +124,25 @@ Changed:
 * Infuser converted to Block Entity
   * Added Renderer
   * Can hold 1 item like a item frame
+
+10/07/2025
+
+Added:
+* Menu for the Infuser
+  * Currently a Furnace Texture.
+  * Currently just has 1 slot (even if multiple are visible).
+
+Changed:
+* Removed adding/removing of the item to Infuser's inventory on right-clicking.
+* Can add/remove item from inventory from the menu now.
+
+11/07/2025
+
+Added:
+* Infusion can be removed by shift right-clicking the grindstone.
+
+Changed:
+* Seeds are now infused in the infuser.
+
+Removed:
+* Deprecated use of bus, as now its automatically defined.
