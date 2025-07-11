@@ -1,39 +1,68 @@
 package net.thedevilthing.firstmod.screen.custom;
 
+import net.minecraft.core.registries.Registries;
 import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.inventory.AbstractContainerMenu;
-import net.minecraft.world.inventory.ContainerLevelAccess;
-import net.minecraft.world.inventory.Slot;
+import net.minecraft.world.inventory.*;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.neoforged.neoforge.items.SlotItemHandler;
 import net.thedevilthing.firstmod.block.ModBlocks;
 import net.thedevilthing.firstmod.block.entity.InfuserBlockEntity;
+import net.thedevilthing.firstmod.item.ModItems;
 import net.thedevilthing.firstmod.screen.ModMenuTypes;
 
 public class InfuserMenu extends AbstractContainerMenu {
     public final InfuserBlockEntity blockEntity;
-    public final Level level;
+    private final Level level;
+    private final ContainerData data;
+    public static final TagKey<Item> INFUSABLES_TAG = TagKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath("firstmod", "infusables"));
 
     public InfuserMenu(int containerId, Inventory inv, FriendlyByteBuf extraData) {
-        this(containerId, inv, inv.player.level().getBlockEntity(extraData.readBlockPos()));
+        this(containerId, inv, inv.player.level().getBlockEntity(extraData.readBlockPos()), new SimpleContainerData(2));
     }
 
-    public InfuserMenu(int containerId, Inventory inv, BlockEntity blockEntity) {
+    public InfuserMenu(int containerId, Inventory inv, BlockEntity blockEntity, ContainerData data) {
         super(ModMenuTypes.INFUSER_MENU.get(), containerId);
         this.blockEntity = ((InfuserBlockEntity) blockEntity);
         this.level = inv.player.level();
+        this.data = data;
 
         addPlayerInventory(inv);
         addPlayerHotbar(inv);
 
-        this.addSlot(new SlotItemHandler(this.blockEntity.inventory, 0, 56, 17));
-//        this.addSlot(new SlotItemHandler(this.blockEntity.inventory, 1, 56, 53));
-//        this.addSlot(new SlotItemHandler(this.blockEntity.inventory, 2, 116, 35));
+        this.addSlot(new SlotItemHandler(this.blockEntity.inventory, 0, 54, 34) {
+            @Override
+            public boolean mayPlace(ItemStack stack) {
+                return stack.is(INFUSABLES_TAG);
+            }
+        });
+        this.addSlot(new SlotItemHandler(this.blockEntity.inventory, 1, 104, 34) {
+            @Override
+            public boolean mayPlace(ItemStack stack) {
+                return stack.getItem() == ModItems.SEED.get();
+            }
+        });
 
+        addDataSlots(data);
+
+    }
+
+    public boolean isCrafting() {
+        return data.get(0) > 0;
+    }
+
+    public int getScaledArrowProgress() {
+        int progress = this.data.get(0);
+        int maxProgress = this.data.get(1);
+        int arrowPixelSize = 24;
+
+        return maxProgress != 0 && progress != 0 ? progress * arrowPixelSize / maxProgress : 0;
     }
 
     // CREDIT GOES TO: diesieben07 | https://github.com/diesieben07/SevenCommons
@@ -52,7 +81,7 @@ public class InfuserMenu extends AbstractContainerMenu {
     private static final int TE_INVENTORY_FIRST_SLOT_INDEX = VANILLA_FIRST_SLOT_INDEX + VANILLA_SLOT_COUNT;
 
     // THIS YOU HAVE TO DEFINE!
-    private static final int TE_INVENTORY_SLOT_COUNT = 1;  // must be the number of slots you have!
+    private static final int TE_INVENTORY_SLOT_COUNT = 2;  // must be the number of slots you have!
     @Override
     public ItemStack quickMoveStack(Player playerIn, int pIndex) {
         Slot sourceSlot = slots.get(pIndex);
@@ -63,9 +92,18 @@ public class InfuserMenu extends AbstractContainerMenu {
         // Check if the slot clicked is one of the vanilla container slots
         if (pIndex < VANILLA_FIRST_SLOT_INDEX + VANILLA_SLOT_COUNT) {
             // This is a vanilla container slot so merge the stack into the tile inventory
-            if (!moveItemStackTo(sourceStack, TE_INVENTORY_FIRST_SLOT_INDEX, TE_INVENTORY_FIRST_SLOT_INDEX
-                    + TE_INVENTORY_SLOT_COUNT, false)) {
-                return ItemStack.EMPTY;  // EMPTY_ITEM
+            // If the source slot item has infusables tag, send it to slot 0 of TE
+            if (sourceStack.is(INFUSABLES_TAG)) {
+                if (!moveItemStackTo(sourceStack, TE_INVENTORY_FIRST_SLOT_INDEX, TE_INVENTORY_FIRST_SLOT_INDEX + 1, false)) {
+                    return ItemStack.EMPTY;
+                }
+            } else if (sourceStack.getItem() == ModItems.SEED.get()) {
+                if (!moveItemStackTo(sourceStack, TE_INVENTORY_FIRST_SLOT_INDEX + 1, TE_INVENTORY_FIRST_SLOT_INDEX
+                        + 2, false)) {
+                    return ItemStack.EMPTY;  // EMPTY_ITEM
+                }
+            } else {
+                return ItemStack.EMPTY;
             }
         } else if (pIndex < TE_INVENTORY_FIRST_SLOT_INDEX + TE_INVENTORY_SLOT_COUNT) {
             // This is a TE slot so merge the stack into the players inventory
